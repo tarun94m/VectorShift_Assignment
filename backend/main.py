@@ -2,8 +2,18 @@ from fastapi import FastAPI, Request
 from pydantic import BaseModel
 from typing import List
 import uvicorn
+from fastapi.middleware.cors import CORSMiddleware
+
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # or ["*"] for all
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class Node(BaseModel):
     id: str
